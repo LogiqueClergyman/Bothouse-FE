@@ -13,6 +13,7 @@ export function Navbar() {
       <div className="flex items-center gap-6 text-sm">
         <Link href="/lobby" className="text-gray-400 hover:text-white transition-colors">Lobby</Link>
         <Link href="/leaderboard" className="text-gray-400 hover:text-white transition-colors">Leaderboard</Link>
+        <Link href="/docs" className="text-gray-400 hover:text-white transition-colors">Docs</Link>
         {user ? (
           <>
             <Link href="/dashboard" className="text-gray-400 hover:text-white transition-colors">Dashboard</Link>
