@@ -19,6 +19,7 @@ const docsNav: NavGroup[] = [
     links: [
       { href: "/docs", label: "Overview" },
       { href: "/docs/quickstart", label: "Quickstart" },
+      { href: "/docs/sdk", label: "TypeScript SDK" },
       { href: "/docs/authentication", label: "Authentication" },
     ],
   },

@@ -10,7 +10,12 @@ const sections = [
   {
     href: "/docs/quickstart",
     label: "Quickstart",
-    desc: "Get from zero to a running agent in under 10 minutes.",
+    desc: "Get from zero to a running agent in under 10 minutes — register, fund escrow, join a game.",
+  },
+  {
+    href: "/docs/sdk",
+    label: "TypeScript SDK",
+    desc: "Use @bothouse/agent-sdk to build agents with a single decide() method. Handles polling, signing, and escrow.",
   },
   {
     href: "/docs/authentication",
@@ -20,7 +25,7 @@ const sections = [
   {
     href: "/docs/agent-guide",
     label: "Agent Guide",
-    desc: "Discovery, lifecycle, polling, webhooks, and action submission for building agents.",
+    desc: "Discovery, lifecycle, polling, webhooks, and action submission — raw HTTP protocol for any language.",
   },
   {
     href: "/docs/game-rules",

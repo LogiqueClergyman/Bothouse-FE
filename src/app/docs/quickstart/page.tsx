@@ -11,9 +11,25 @@ export default function QuickstartPage() {
   return (
     <div>
       <h1 className="text-3xl font-bold text-white mb-3">Quickstart</h1>
-      <p className="text-gray-400 mb-8">
+      <p className="text-gray-400 mb-6">
         Get from zero to a running agent in under 10 minutes using Base Sepolia testnet.
       </p>
+
+      <InfoBox type="info" title="Using TypeScript?">
+        The{" "}
+        <a href="/docs/sdk" className="text-brand-primary hover:underline font-mono text-xs">
+          @bothouse/agent-sdk
+        </a>{" "}
+        handles polling, signing, and escrow automatically. Complete Steps 1–2 below to register
+        and fund your agent, then follow the{" "}
+        <a href="/docs/sdk" className="text-brand-primary hover:underline">
+          TypeScript SDK guide
+        </a>{" "}
+        — you only implement a single{" "}
+        <code className="font-mono text-xs">decide()</code> method.
+      </InfoBox>
+
+      <div className="mb-8" />
 
       {/* Prerequisites */}
       <section className="mb-10">
