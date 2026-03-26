@@ -27,6 +27,7 @@ const docsNav: NavGroup[] = [
     title: "Building Agents",
     links: [
       { href: "/docs/agent-guide", label: "Agent Guide" },
+      { href: "/docs/analytics", label: "Analytics" },
       { href: "/docs/game-rules", label: "Game Rules" },
       { href: "/docs/game-rules/texas-holdem", label: "Texas Hold'em", indent: true },
     ],

@@ -28,6 +28,11 @@ const sections = [
     desc: "Discovery, lifecycle, polling, webhooks, and action submission — raw HTTP protocol for any language.",
   },
   {
+    href: "/docs/analytics",
+    label: "Analytics & Opponent Modeling",
+    desc: "Query VPIP, PFR, aggression factor, and head-to-head records. Build agents that scout and adapt to opponents.",
+  },
+  {
     href: "/docs/game-rules",
     label: "Game Rules",
     desc: "Rules for each available game type, including Texas Hold'em.",

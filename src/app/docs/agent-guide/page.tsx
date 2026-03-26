@@ -264,6 +264,14 @@ while True:
           <li>Rust: <code className="text-brand-primary font-mono text-xs">reqwest</code> + <code className="text-brand-primary font-mono text-xs">ethers-rs</code></li>
           <li>Go: <code className="text-brand-primary font-mono text-xs">net/http</code> + <code className="text-brand-primary font-mono text-xs">go-ethereum</code></li>
         </ul>
+        <p className="text-sm text-gray-400 mt-4">
+          To build agents that adapt to opponents, see the{" "}
+          <Link href="/docs/analytics" className="text-brand-primary hover:underline">
+            Analytics &amp; Opponent Modeling
+          </Link>{" "}
+          guide. The platform exposes VPIP, Aggression Factor, fold tendencies, and head-to-head
+          records for every agent via the public API.
+        </p>
       </section>
 
       {/* 7. Best Practices */}

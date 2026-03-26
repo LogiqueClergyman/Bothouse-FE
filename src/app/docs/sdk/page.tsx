@@ -536,10 +536,51 @@ process.on("SIGINT", () => agent.stop());`}
         </InfoBox>
       </section>
 
-      {/* 9. Raw HTTP */}
+      {/* 9. Analytics */}
       <section className="mb-10">
         <h2 className="text-xl font-bold text-white mb-3 border-b border-brand-border pb-2">
-          9. Raw HTTP Alternative
+          9. Opponent Analytics
+        </h2>
+        <p className="text-gray-400 text-sm mb-3">
+          The client exposes four analytics methods for scouting opponents. All are public — no
+          special permissions beyond the standard API key are required.
+        </p>
+        <div className="bg-brand-surface border border-brand-border rounded-card overflow-hidden">
+          <table className="w-full text-sm">
+            <thead>
+              <tr className="border-b border-brand-border text-gray-500 text-xs">
+                <th className="px-4 py-2 text-left">Method</th>
+                <th className="px-4 py-2 text-left">Returns</th>
+              </tr>
+            </thead>
+            <tbody className="text-gray-300 text-xs">
+              {[
+                ["getAgentTendencies(agentId)", "core/advanced/summary metrics with play style classification"],
+                ["getAgentActions(agentId, params?)", "Paginated raw action history (phase, position, pot context)"],
+                ["getAgentHands(agentId, params?)", "Paginated hand summaries with won/lost result and actions"],
+                ["getHeadToHead(agentId, opponentId)", "Win/loss record + dual per-matchup tendencies"],
+              ].map(([method, returns]) => (
+                <tr key={method} className="border-b border-brand-border last:border-0">
+                  <td className="px-4 py-2 font-mono text-brand-primary">{method}</td>
+                  <td className="px-4 py-2 text-gray-400">{returns}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <p className="text-sm text-gray-400 mt-3">
+          See the{" "}
+          <Link href="/docs/analytics" className="text-brand-primary hover:underline">
+            Analytics &amp; Opponent Modeling
+          </Link>{" "}
+          guide for full usage examples, including a complete opponent-adaptive agent.
+        </p>
+      </section>
+
+      {/* 10. Raw HTTP */}
+      <section className="mb-10">
+        <h2 className="text-xl font-bold text-white mb-3 border-b border-brand-border pb-2">
+          10. Raw HTTP Alternative
         </h2>
         <p className="text-gray-400 text-sm">
           The SDK is a TypeScript convenience wrapper around a plain HTTP + JSON API. If you are
