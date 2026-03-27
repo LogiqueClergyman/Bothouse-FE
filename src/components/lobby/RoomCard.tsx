@@ -42,7 +42,7 @@ export function RoomCard({ room }: { room: RoomWithSeats }) {
           {room.status}
         </span>
       </div>
-      <div className="text-2xl font-mono font-bold mb-1">{weiToEth(room.buy_in_wei)} ETH</div>
+      <div className="text-2xl font-mono font-bold mb-1">{weiToEth(room.buy_in_atomic)}</div>
       <div className="text-sm text-gray-400 mb-4">
         {room.seats.length}/{room.max_players} players
       </div>

@@ -30,10 +30,10 @@ export interface AgentStats {
   game_type: string;
   games_played: number;
   games_won: number;
-  total_wagered_wei: string;
-  total_won_wei: string;
-  total_lost_wei: string;
-  net_profit_wei: string;
+  total_wagered_atomic: string;
+  total_won_atomic: string;
+  total_lost_atomic: string;
+  net_profit_atomic: string;
   win_rate: number;
   updated_at: string;
 }
@@ -43,7 +43,7 @@ export interface Room {
   game_type: string;
   game_version: string;
   status: RoomStatus;
-  buy_in_wei: string;
+  buy_in_atomic: string;
   max_players: number;
   min_players: number;
   created_at: string;
@@ -84,27 +84,27 @@ export interface GameLogEntry {
   timestamp: string;
   agent_id?: string;
   action: string;
-  amount_wei?: string;
+  amount_atomic?: string;
   state_hash: string;
 }
 
 export interface WinnerEntry {
   agent_id: string;
   wallet_address: string;
-  amount_won_wei: string;
+  amount_won_atomic: string;
 }
 
 export interface LoserEntry {
   agent_id: string;
   wallet_address: string;
-  amount_lost_wei: string;
+  amount_lost_atomic: string;
 }
 
 export interface GameResult {
   game_id: string;
   winners: WinnerEntry[];
   losers: LoserEntry[];
-  rake_wei: string;
+  rake_atomic: string;
   rake_rate_bps: number;
   signed_result_hash: string;
 }
@@ -125,7 +125,7 @@ export interface Settlement {
 export interface PlatformStats {
   total_agents: number;
   games_in_progress: number;
-  total_volume_wei: string;
+  total_volume_atomic: string;
 }
 
 export interface LeaderboardEntry {
@@ -138,7 +138,7 @@ export interface SpectatorPlayer {
   agent_id: string;
   name: string;
   seat_number: number;
-  stack_wei: string;
+  stack_atomic: string;
   status: PlayerStatus;
   last_action?: string;
 }
@@ -165,8 +165,8 @@ export interface AgentGameStateView {
   visible_state: Record<string, unknown>;
   valid_actions: string[];
   wallet: {
-    escrowed_wei: string;
-    at_stake_wei: string;
+    escrowed_atomic: string;
+    at_stake_atomic: string;
   };
 }
 
@@ -178,7 +178,7 @@ export interface GameLogResponse {
 
 export interface ActionRequest {
   action: string;
-  amount_wei?: string;
+  amount_atomic?: string;
   turn_number: number;
   signature: string;
 }
@@ -212,7 +212,7 @@ export interface UpdateAgentRequest {
 
 export interface CreateRoomRequest {
   game_type: string;
-  buy_in_wei: string;
+  buy_in_atomic: string;
   max_players: number;
   min_players: number;
   escrow_tx_hash: string;
@@ -235,7 +235,7 @@ export interface GameListParams {
 
 export interface LeaderboardParams {
   game_type?: string;
-  sort_by?: "win_rate" | "net_profit_wei" | "games_played";
+  sort_by?: "win_rate" | "net_profit_atomic" | "games_played";
   period?: "all_time" | "weekly" | "monthly";
   limit?: number;
   offset?: number;

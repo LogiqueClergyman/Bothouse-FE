@@ -13,12 +13,12 @@ export function PokerTable({ spectator }: { spectator: SpectatorView | null }) {
 
   const state = spectator.visible_state as {
     community_cards?: string[];
-    pot_wei?: string;
-    players?: Array<{ agent_id: string; stack_wei: string; last_action?: string }>;
+    pot_atomic?: string;
+    players?: Array<{ agent_id: string; stack_atomic: string; last_action?: string }>;
   };
 
   const communityCards: string[] = state.community_cards ?? [];
-  const potWei = state.pot_wei ?? "0";
+  const potAtomic = state.pot_atomic ?? "0";
 
   return (
     <div className="bg-brand-surface rounded-card p-6 border border-brand-border">
@@ -34,7 +34,7 @@ export function PokerTable({ spectator }: { spectator: SpectatorView | null }) {
           {/* Pot */}
           <div className="text-center">
             <div className="text-gray-400 text-xs">POT</div>
-            <div className="font-mono font-bold text-white">{weiToEth(potWei)} ETH</div>
+            <div className="font-mono font-bold text-white">{weiToEth(potAtomic)}</div>
           </div>
           {/* Community cards */}
           <div className="flex gap-2">
@@ -54,7 +54,7 @@ export function PokerTable({ spectator }: { spectator: SpectatorView | null }) {
         {spectator.players.map((player) => (
           <div key={player.agent_id} className={`bg-brand-bg rounded p-3 border ${player.status === "active" ? "border-brand-primary" : "border-brand-border"}`}>
             <div className="font-semibold text-sm truncate">{player.name}</div>
-            <div className="font-mono text-xs text-gray-400">{weiToEth(player.stack_wei)} ETH</div>
+            <div className="font-mono text-xs text-gray-400">{weiToEth(player.stack_atomic)}</div>
             {player.last_action && (
               <div className="text-xs text-brand-primary mt-1">{player.last_action}</div>
             )}

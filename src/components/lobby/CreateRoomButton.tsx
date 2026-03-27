@@ -9,7 +9,7 @@ export function CreateRoomButton() {
   const [loading, setLoading] = useState(false);
   const [form, setForm] = useState({
     game_type: "texas_holdem_v1",
-    buy_in_wei: "1000000000000000000",
+    buy_in_atomic: "1000000000000000000",
     max_players: 6,
     min_players: 2,
     escrow_tx_hash: "",
@@ -59,11 +59,11 @@ export function CreateRoomButton() {
                 </select>
               </div>
               <div>
-                <label className="block text-sm text-gray-400 mb-1">Buy-in (wei)</label>
+                <label className="block text-sm text-gray-400 mb-1">Buy-in (atomic units)</label>
                 <input
                   type="text"
-                  value={form.buy_in_wei}
-                  onChange={(e) => setForm({ ...form, buy_in_wei: e.target.value })}
+                  value={form.buy_in_atomic}
+                  onChange={(e) => setForm({ ...form, buy_in_atomic: e.target.value })}
                   className="w-full bg-brand-bg border border-brand-border rounded-input px-3 py-2 text-white font-mono"
                 />
               </div>

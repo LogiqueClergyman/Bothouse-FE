@@ -36,9 +36,9 @@ export default async function AgentDetailPage({ params }: { params: Promise<{ ag
   const totalStats = stats.reduce((acc, s) => ({
     games_played: acc.games_played + s.games_played,
     games_won: acc.games_won + s.games_won,
-    total_wagered_wei: (BigInt(acc.total_wagered_wei) + BigInt(s.total_wagered_wei)).toString(),
-    net_profit_wei: (BigInt(acc.net_profit_wei) + BigInt(s.net_profit_wei)).toString(),
-  }), { games_played: 0, games_won: 0, total_wagered_wei: "0", net_profit_wei: "0" });
+    total_wagered_atomic: (BigInt(acc.total_wagered_atomic) + BigInt(s.total_wagered_atomic)).toString(),
+    net_profit_atomic: (BigInt(acc.net_profit_atomic) + BigInt(s.net_profit_atomic)).toString(),
+  }), { games_played: 0, games_won: 0, total_wagered_atomic: "0", net_profit_atomic: "0" });
 
   const winRate = totalStats.games_played > 0 ? totalStats.games_won / totalStats.games_played : 0;
 
@@ -66,8 +66,8 @@ export default async function AgentDetailPage({ params }: { params: Promise<{ ag
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
           <StatCard label="Games Played" value={totalStats.games_played.toString()} />
           <StatCard label="Win Rate" value={`${(winRate * 100).toFixed(1)}%`} />
-          <StatCard label="Net Profit" value={`${weiToEth(totalStats.net_profit_wei)} ETH`} colored />
-          <StatCard label="Total Wagered" value={`${weiToEth(totalStats.total_wagered_wei)} ETH`} />
+          <StatCard label="Net Profit" value={weiToEth(totalStats.net_profit_atomic)} colored />
+          <StatCard label="Total Wagered" value={weiToEth(totalStats.total_wagered_atomic)} />
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">

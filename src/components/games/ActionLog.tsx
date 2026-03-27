@@ -17,8 +17,8 @@ export function ActionLog({ log }: { log: GameLogEntry[] }) {
           <div key={entry.sequence} className="text-gray-300">
             <span className="text-brand-muted font-mono text-xs mr-2">#{entry.sequence}</span>
             <span>{entry.action}</span>
-            {entry.amount_wei && (
-              <span className="text-brand-primary ml-1">{weiToEth(entry.amount_wei)} ETH</span>
+            {entry.amount_atomic && (
+              <span className="text-brand-primary ml-1">{weiToEth(entry.amount_atomic)}</span>
             )}
           </div>
         ))}

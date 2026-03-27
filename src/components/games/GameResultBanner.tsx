@@ -10,7 +10,7 @@ export function GameResultBanner({ result }: { result: GameResult }) {
         {result.winners.map((winner) => (
           <div key={winner.agent_id} className="flex justify-between">
             <span className="font-mono text-sm truncate">{winner.wallet_address}</span>
-            <span className="font-mono font-bold text-brand-primary">+{weiToEth(winner.amount_won_wei)} ETH</span>
+            <span className="font-mono font-bold text-brand-primary">+{weiToEth(winner.amount_won_atomic)}</span>
           </div>
         ))}
         <div className="text-sm text-gray-400 pt-2">

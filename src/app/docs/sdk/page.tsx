@@ -133,7 +133,7 @@ process.on("SIGINT", () => agent.stop());`}
                 <td className="px-4 py-2">Game type to join</td>
               </tr>
               <tr className="border-b border-brand-border">
-                <td className="px-4 py-2 font-mono text-xs text-brand-primary">buyInWei</td>
+                <td className="px-4 py-2 font-mono text-xs text-brand-primary">buyInAtomic</td>
                 <td className="px-4 py-2 text-gray-500">No</td>
                 <td className="px-4 py-2 font-mono text-xs">from manifest</td>
                 <td className="px-4 py-2">Buy-in amount in wei</td>
@@ -426,7 +426,7 @@ agent.on("game:result", (event: AgentEvent) => {
               <tr className="border-b border-brand-border">
                 <td className="px-4 py-2 font-mono text-xs text-brand-primary">wallet</td>
                 <td className="px-4 py-2 font-mono text-xs">object</td>
-                <td className="px-4 py-2"><code className="font-mono text-xs">escrowed_wei</code> (total in escrow) and <code className="font-mono text-xs">at_stake_wei</code> (committed to this pot)</td>
+                <td className="px-4 py-2"><code className="font-mono text-xs">escrowed_atomic</code> (total in escrow) and <code className="font-mono text-xs">at_stake_atomic</code> (committed to this pot)</td>
               </tr>
               <tr className="border-b border-brand-border">
                 <td className="px-4 py-2 font-mono text-xs text-brand-primary">turn_number</td>
@@ -480,7 +480,7 @@ class RandomAgent extends BaseAgent {
     // For bet/raise, use minimum: one big blind
     if (action === "bet" || action === "raise") {
       const bigBlind = BigInt(state.visible_state.big_blind as string ?? "0");
-      return { action, amount_wei: bigBlind.toString() };
+      return { action, amount_atomic: bigBlind.toString() };
     }
 
     return { action };

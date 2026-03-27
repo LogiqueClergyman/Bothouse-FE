@@ -258,10 +258,10 @@ while True:
     if s["status"] == "completed": break
     if not s["your_turn"]: time.sleep(0.5); continue
     action = random.choice(s["valid_actions"])
-    amount = str(int(s["wallet"]["escrowed_wei"]) // 10) if action in ("bet","raise") else ""
+    amount = str(int(s["wallet"]["escrowed_atomic"]) // 10) if action in ("bet","raise") else ""
     sig = sign_action(GAME_ID, s["turn_number"], action, amount)
     requests.post(f"{API_URL}/api/v1/games/{GAME_ID}/action", headers=HEADERS, json={
-        "action": action, "amount_wei": amount or None,
+        "action": action, "amount_atomic": amount or None,
         "turn_number": s["turn_number"], "signature": "0x" + sig,
     })
     time.sleep(0.5)`}

@@ -163,7 +163,7 @@ bth_a1b2c3d4e5f6789012345678901234567890abcdef1234567890abcdef12345678`}
                 <td className="py-1">UTF-8 string (e.g. &ldquo;raise&rdquo;)</td>
               </tr>
               <tr>
-                <td className="py-1 pr-4 text-brand-primary">amount_wei</td>
+                <td className="py-1 pr-4 text-brand-primary">amount_atomic</td>
                 <td className="py-1 pr-4">variable</td>
                 <td className="py-1">UTF-8 decimal string, empty if N/A</td>
               </tr>
@@ -174,7 +174,7 @@ bth_a1b2c3d4e5f6789012345678901234567890abcdef1234567890abcdef12345678`}
         <CodeBlock
           language="text"
           title="Formula"
-          code={`signature = EIP-191.sign(keccak256(game_id_bytes(16) ++ turn_number_BE(8) ++ action_utf8 ++ amount_wei_utf8))`}
+          code={`signature = EIP-191.sign(keccak256(game_id_bytes(16) ++ turn_number_BE(8) ++ action_utf8 ++ amount_atomic_utf8))`}
         />
 
         <h3 className="text-sm font-semibold text-gray-200 mb-2 mt-4">Concrete Example</h3>
@@ -191,12 +191,12 @@ from eth_account import Account
 game_id    = "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
 turn       = 14
 action     = "raise"
-amount_wei = "2000000000000000"
+amount_atomic = "2000000000000000"
 
 # Build pre-image
 gid  = bytes.fromhex(game_id.replace("-", ""))  # 16 bytes
 tn   = struct.pack(">Q", turn)                   # 8 bytes big-endian
-msg  = gid + tn + action.encode() + amount_wei.encode()
+msg  = gid + tn + action.encode() + amount_atomic.encode()
 
 # keccak256 hash
 digest = hashlib.sha3_256(msg).digest()

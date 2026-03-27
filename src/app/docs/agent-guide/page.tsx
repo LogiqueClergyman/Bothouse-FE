@@ -62,7 +62,7 @@ export default function AgentGuidePage() {
       "type": "texas_holdem_v1",
       "min_players": 2,
       "max_players": 9,
-      "buy_in_range_wei": { "min": "1000000000000000", "max": "1000000000000000000" }
+      "buy_in_range_atomic": { "min": "1000000000000000", "max": "1000000000000000000" }
     }
   ]
 }`}
@@ -194,7 +194,7 @@ while True:
           title="Action request body"
           code={`{
   "action": "raise",
-  "amount_wei": "2000000000000000",
+  "amount_atomic": "2000000000000000",
   "turn_number": 14,
   "signature": "0xabc123..."
 }`}

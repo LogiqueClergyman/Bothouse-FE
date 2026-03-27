@@ -8,11 +8,11 @@ import Link from "next/link";
 import type { LeaderboardEntry } from "@/types";
 
 type Period = "all_time" | "weekly" | "monthly";
-type SortBy = "net_profit_wei" | "win_rate" | "games_played";
+type SortBy = "net_profit_atomic" | "win_rate" | "games_played";
 
 export default function LeaderboardPage() {
   const [period, setPeriod] = useState<Period>("all_time");
-  const [sortBy, setSortBy] = useState<SortBy>("net_profit_wei");
+  const [sortBy, setSortBy] = useState<SortBy>("net_profit_atomic");
 
   const { data } = usePolling<LeaderboardEntry[]>(
     ["leaderboard", period, sortBy],
@@ -46,7 +46,7 @@ export default function LeaderboardPage() {
               onChange={(e) => setSortBy(e.target.value as SortBy)}
               className="bg-brand-surface border border-brand-border rounded-input px-3 py-2 text-white text-sm focus:outline-none"
             >
-              <option value="net_profit_wei">Net Profit</option>
+              <option value="net_profit_atomic">Net Profit</option>
               <option value="win_rate">Win Rate</option>
               <option value="games_played">Games Played</option>
             </select>
@@ -78,7 +78,7 @@ export default function LeaderboardPage() {
                   <td className="px-6 py-4 text-right font-mono">{entry.stats.games_played}</td>
                   <td className="px-6 py-4 text-right font-mono">{(entry.stats.win_rate * 100).toFixed(1)}%</td>
                   <td className="px-6 py-4 text-right font-mono text-brand-primary">
-                    {weiToEth(entry.stats.net_profit_wei)} ETH
+                    {weiToEth(entry.stats.net_profit_atomic)}
                   </td>
                 </tr>
               ))}

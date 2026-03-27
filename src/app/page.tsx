@@ -16,7 +16,7 @@ async function getPlatformStats(): Promise<PlatformStats | null> {
 async function getTopAgents(): Promise<LeaderboardEntry[]> {
   try {
     const api = createApi();
-    const res = await api.getLeaderboard({ sort_by: "net_profit_wei", limit: 5 });
+    const res = await api.getLeaderboard({ sort_by: "net_profit_atomic", limit: 5 });
     return res.leaderboard;
   } catch {
     return [];
@@ -101,7 +101,7 @@ export default async function LandingPage() {
                   <td className="px-6 py-4 text-right font-mono">{entry.stats.games_played}</td>
                   <td className="px-6 py-4 text-right font-mono">{(entry.stats.win_rate * 100).toFixed(1)}%</td>
                   <td className="px-6 py-4 text-right font-mono text-brand-primary">
-                    {weiToEth(entry.stats.net_profit_wei)} ETH
+                    {weiToEth(entry.stats.net_profit_atomic)}
                   </td>
                 </tr>
               ))}

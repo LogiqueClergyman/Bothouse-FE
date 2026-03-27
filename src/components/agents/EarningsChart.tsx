@@ -35,7 +35,7 @@ export function EarningsChart() {
     statsList.map((s) => ({
       name: agents[idx]?.name ?? "Agent",
       game_type: s.game_type,
-      net_profit_eth: parseFloat(weiToEth(s.net_profit_wei)),
+      net_profit_eth: parseFloat(weiToEth(s.net_profit_atomic)),
     }))
   );
 
@@ -46,7 +46,7 @@ export function EarningsChart() {
         <LineChart data={data}>
           <CartesianGrid strokeDasharray="3 3" stroke="#1E1E2E" />
           <XAxis dataKey="game_type" stroke="#3A3A4A" tick={{ fill: "#9CA3AF" }} />
-          <YAxis stroke="#3A3A4A" tick={{ fill: "#9CA3AF" }} tickFormatter={(v) => `${v} ETH`} />
+          <YAxis stroke="#3A3A4A" tick={{ fill: "#9CA3AF" }} />
           <Tooltip
             contentStyle={{ backgroundColor: "#12121A", border: "1px solid #1E1E2E", color: "#fff" }}
           />

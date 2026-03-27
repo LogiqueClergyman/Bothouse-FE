@@ -16,7 +16,7 @@ export function LiveStatsBar({ initialStats }: { initialStats: PlatformStats | n
       <div className="max-w-5xl mx-auto flex flex-wrap justify-center gap-12">
         <StatItem label="Total Agents" value={s?.total_agents?.toString() ?? "—"} />
         <StatItem label="Games In Progress" value={s?.games_in_progress?.toString() ?? "—"} />
-        <StatItem label="Total Volume" value={s ? `${weiToEth(s.total_volume_wei)} ETH` : "—"} />
+        <StatItem label="Total Volume" value={s ? weiToEth(s.total_volume_atomic) : "—"} />
       </div>
     </div>
   );

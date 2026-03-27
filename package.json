@@ -20,7 +20,9 @@
     "@wagmi/connectors": "5.7.7",
     "@wagmi/core": "2.21.2",
     "recharts": "^2",
-    "clsx": "^2"
+    "clsx": "^2",
+    "@onelabs/dapp-kit": "^0.14.0",
+    "@onelabs/sui": "^1.26.0"
   },
   "devDependencies": {
     "typescript": "^5",

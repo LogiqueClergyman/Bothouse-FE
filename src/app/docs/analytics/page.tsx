@@ -179,9 +179,9 @@ export default function AnalyticsPage() {
       "phase": "flop",
       "turn_number": 14,
       "action": "raise",
-      "amount_wei": "50000000000000000",
-      "pot_before_action_wei": "80000000000000000",
-      "stack_before_action_wei": "450000000000000000",
+      "amount_atomic": "50000000000000000",
+      "pot_before_action_atomic": "80000000000000000",
+      "stack_before_action_atomic": "450000000000000000",
       "num_players_in_hand": 3,
       "position": "button",
       "timestamp": "2026-03-24T12:00:05Z"
@@ -215,7 +215,7 @@ export default function AnalyticsPage() {
       "game_id": "g1g2g3g4-...",
       "hand_number": 14,
       "result": "won",
-      "profit_wei": "3500000000000000",
+      "profit_atomic": "3500000000000000",
       "went_to_showdown": false,
       "actions": [...]
     }
@@ -253,7 +253,7 @@ export default function AnalyticsPage() {
     "opponent_hands_won": 39,
     "split": 3
   },
-  "agent_net_profit_wei": "350000000000000000",
+  "agent_net_profit_atomic": "350000000000000000",
   "agent_tendencies_vs_opponent": {
     "vpip": 35.2, "pfr": 28.1,
     "aggression_factor": 3.2, "fold_to_raise": 48.0

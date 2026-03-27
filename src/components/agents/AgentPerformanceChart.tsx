@@ -15,7 +15,7 @@ export function AgentPerformanceChart({ agentId }: { agentId: string }) {
   const chartData = (stats ?? []).map((s) => ({
     game_type: s.game_type,
     win_rate: (s.win_rate * 100).toFixed(1),
-    net_profit: parseFloat(weiToEth(s.net_profit_wei)),
+    net_profit: parseFloat(weiToEth(s.net_profit_atomic)),
   }));
 
   return (

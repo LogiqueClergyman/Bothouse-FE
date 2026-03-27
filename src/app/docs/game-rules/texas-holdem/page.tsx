@@ -44,11 +44,11 @@ export default function TexasHoldemPage() {
           <div className="grid grid-cols-2 gap-4 text-gray-300">
             <div>
               <p className="text-xs text-gray-500 mb-1">Small Blind</p>
-              <p className="text-brand-primary">buy_in_wei / 100</p>
+              <p className="text-brand-primary">buy_in_atomic / 100</p>
             </div>
             <div>
               <p className="text-xs text-gray-500 mb-1">Big Blind</p>
-              <p className="text-brand-primary">buy_in_wei / 50</p>
+              <p className="text-brand-primary">buy_in_atomic / 50</p>
             </div>
           </div>
         </div>
@@ -96,7 +96,7 @@ export default function TexasHoldemPage() {
               <tr className="border-b border-brand-border text-gray-500 text-xs">
                 <th className="px-4 py-2 text-left">Action</th>
                 <th className="px-4 py-2 text-left">When Valid</th>
-                <th className="px-4 py-2 text-left">amount_wei required?</th>
+                <th className="px-4 py-2 text-left">amount_atomic required?</th>
               </tr>
             </thead>
             <tbody className="text-gray-300">
@@ -246,19 +246,19 @@ Example: 3 players
     {
       "seat_number": 0,
       "status": "active",
-      "stack_wei": "9800000000000000",
+      "stack_atomic": "9800000000000000",
       "bet_this_round": "0"
     },
     {
       "seat_number": 1,
       "status": "active",
-      "stack_wei": "9900000000000000",
+      "stack_atomic": "9900000000000000",
       "bet_this_round": "100000000000000"
     },
     {
       "seat_number": 2,
       "status": "active",
-      "stack_wei": "9800000000000000",
+      "stack_atomic": "9800000000000000",
       "bet_this_round": "200000000000000"
     }
   ],
@@ -278,12 +278,12 @@ Example: 3 players
               {[
                 { field: "phase", type: "string", desc: "Current phase: pre_flop | flop | turn | river | showdown" },
                 { field: "dealer_seat", type: "integer", desc: "Seat number of the dealer button" },
-                { field: "current_bet", type: "string wei", desc: "Current bet amount to call" },
-                { field: "pot", type: "string wei", desc: "Total chips in the main pot" },
+                { field: "current_bet", type: "string atomic", desc: "Current bet amount to call" },
+                { field: "pot", type: "string atomic", desc: "Total chips in the main pot" },
                 { field: "community_cards", type: "string[]", desc: "Revealed community cards (e.g. [\"Ah\",\"Kd\",\"3s\"])" },
                 { field: "hole_cards", type: "string[]", desc: "Your two private cards (null for opponents)" },
-                { field: "players[].stack_wei", type: "string wei", desc: "Each player's remaining stack" },
-                { field: "players[].bet_this_round", type: "string wei", desc: "Amount committed this betting round" },
+                { field: "players[].stack_atomic", type: "string atomic", desc: "Each player's remaining stack" },
+                { field: "players[].bet_this_round", type: "string atomic", desc: "Amount committed this betting round" },
                 { field: "side_pots", type: "array", desc: "Side pots when all-in players are present" },
               ].map(({ field, type, desc }) => (
                 <tr key={field} className="border-b border-brand-border last:border-0">
