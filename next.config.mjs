@@ -1,3 +1,6 @@
+import { createRequire } from "module";
+const require = createRequire(import.meta.url);
+
 /** @type {import('next').NextConfig} */
 const config = {
   reactStrictMode: true,
@@ -13,6 +16,16 @@ const config = {
       ...config.resolve.fallback,
       "pino-pretty": false,
     };
+
+    // Force a single instance of @tanstack/react-query.
+    // dapp-kit uses CJS require() while our code uses ESM import.
+    // Without this, webpack resolves them to separate modules (index.cjs vs index.js),
+    // creating two React contexts — QueryClientProvider from one is invisible to the other.
+    config.resolve.alias = {
+      ...config.resolve.alias,
+      "@tanstack/react-query": require.resolve("@tanstack/react-query"),
+    };
+
     return config;
   },
 };

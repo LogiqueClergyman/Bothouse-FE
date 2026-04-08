@@ -1,16 +1,94 @@
 "use client";
 import { useState } from "react";
-import { useConnect, useSignMessage, useAccount } from "wagmi";
-import { injected } from "wagmi/connectors";
 import { createApi } from "@/lib/api";
 import { useAuthStore } from "@/stores/authStore";
+import { CHAIN_TYPE } from "@/lib/chain-provider";
 
-export function RegisterForm() {
+// ─── EVM variant ─────────────────────────────────────────────────────────────
+
+function RegisterFormEvm() {
+  const { useConnect, useSignMessage, useAccount } = require("wagmi");
+  const { injected } = require("wagmi/connectors");
   const { address, isConnected } = useAccount();
   const { connect } = useConnect();
   const { signMessageAsync } = useSignMessage();
-  const setAuth = useAuthStore((s) => s.setAuth);
 
+  return (
+    <RegisterFormInner
+      address={address}
+      isConnected={isConnected}
+      connectButton={
+        <button
+          type="button"
+          data-agent-action="connect-wallet"
+          onClick={() => connect({ connector: injected() })}
+          className="w-full bg-brand-primary text-black py-3 rounded-card font-bold"
+        >
+          Connect Wallet
+        </button>
+      }
+      signMessage={(msg: string) => signMessageAsync({ message: msg })}
+    />
+  );
+}
+
+// ─── OneChain variant ─────────────────────────────────────────────────────────
+
+function RegisterFormOneChain() {
+  const {
+    useCurrentAccount,
+    useSignPersonalMessage,
+    ConnectModal,
+  } = require("@onelabs/dapp-kit");
+  require("@onelabs/dapp-kit/dist/index.css");
+
+  const account = useCurrentAccount();
+  const { mutateAsync: signPersonalMessage } = useSignPersonalMessage();
+  const [modalOpen, setModalOpen] = useState(false);
+
+  return (
+    <RegisterFormInner
+      address={account?.address}
+      isConnected={!!account}
+      connectButton={
+        <ConnectModal
+          trigger={
+            <button
+              type="button"
+              data-agent-action="connect-wallet"
+              className="w-full bg-brand-primary text-black py-3 rounded-card font-bold"
+            >
+              Connect Wallet
+            </button>
+          }
+          open={modalOpen}
+          onOpenChange={setModalOpen}
+        />
+      }
+      signMessage={async (msg: string) => {
+        const { signature } = await signPersonalMessage({
+          message: new TextEncoder().encode(msg),
+        });
+        return signature;
+      }}
+    />
+  );
+}
+
+// ─── Shared form ─────────────────────────────────────────────────────────────
+
+function RegisterFormInner({
+  address,
+  isConnected,
+  connectButton,
+  signMessage,
+}: {
+  address: string | undefined;
+  isConnected: boolean;
+  connectButton: React.ReactNode;
+  signMessage: (msg: string) => Promise<string>;
+}) {
+  const setAuth = useAuthStore((s) => s.setAuth);
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [webhookUrl, setWebhookUrl] = useState("");
@@ -26,7 +104,7 @@ export function RegisterForm() {
     try {
       const api = createApi();
       const { nonce } = await api.getNonce(address);
-      const signature = await signMessageAsync({ message: nonce });
+      const signature = await signMessage(nonce);
       const { access_token, refresh_token, user_id } = await api.verify(address, signature);
       setAuth({ user_id, wallet: address }, access_token, refresh_token);
       const authedApi = createApi(access_token);
@@ -63,14 +141,7 @@ export function RegisterForm() {
   return (
     <form data-agent-form="register" onSubmit={handleSubmit} className="bg-brand-surface rounded-card p-8 border border-brand-border space-y-6">
       {!isConnected ? (
-        <button
-          type="button"
-          data-agent-action="connect-wallet"
-          onClick={() => connect({ connector: injected() })}
-          className="w-full bg-brand-primary text-black py-3 rounded-card font-bold"
-        >
-          Connect Wallet
-        </button>
+        connectButton
       ) : (
         <div className="text-sm text-gray-400">
           Connected: <span className="font-mono text-white">{address}</span>
@@ -133,4 +204,10 @@ export function RegisterForm() {
       </button>
     </form>
   );
+}
+
+// ─── Entry point ──────────────────────────────────────────────────────────────
+
+export function RegisterForm() {
+  return CHAIN_TYPE === "onechain" ? <RegisterFormOneChain /> : <RegisterFormEvm />;
 }

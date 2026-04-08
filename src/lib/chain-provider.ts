@@ -46,18 +46,20 @@ export function getEvmConfig() {
 // ─── OneChain (@onelabs/dapp-kit) ────────────────────────────────────────────
 
 export function getOneChainNetworks() {
-    const { getFullnodeUrl } = require("@onelabs/sui/client");
-
     const rpcUrl =
-        process.env.NEXT_PUBLIC_ONECHAIN_RPC_URL ??
+        process.env.NEXT_PUBLIC_RPC_URL ??
         "https://rpc-testnet.onelabs.cc:443";
+
+    const explorerUrl =
+        process.env.NEXT_PUBLIC_EXPLORER_URL ??
+        "https://onescan.cc/testnet";
 
     return [
         {
-            id: "onechain-testnet",
-            name: "OneChain Testnet",
+            id: "onechain",
+            name: "OneChain",
             rpcUrl,
-            explorerUrl: "https://onescan.cc/testnet",
+            explorerUrl,
         },
     ];
 }
@@ -79,8 +81,14 @@ export function formatAtomicAmount(amount: string, chainType: ChainType = CHAIN_
     return `${whole}${fracStr ? "." + fracStr : ""} ${symbol}`;
 }
 
-export function getExplorerTxUrl(txHash: string, chainType: ChainType = CHAIN_TYPE): string {
-    switch (chainType) {
+// ─── Explorer URLs (from env) ────────────────────────────────────────────────
+
+export function getExplorerTxUrl(txHash: string): string {
+    const base = process.env.NEXT_PUBLIC_EXPLORER_URL;
+    if (base) return `${base}/tx/${txHash}`;
+
+    // Fallback if env not set
+    switch (CHAIN_TYPE) {
         case "evm":
             return `https://sepolia.basescan.org/tx/${txHash}`;
         case "onechain":

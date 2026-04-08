@@ -4,6 +4,7 @@ import { useAgentsStore } from "@/stores/agentsStore";
 import { createApi } from "@/lib/api";
 import { usePolling } from "@/hooks/usePolling";
 import { formatDate } from "@/lib/utils";
+import { getExplorerTxUrl } from "@/lib/chain-provider";
 import type { Settlement } from "@/types";
 
 export function TransactionHistoryTable() {
@@ -21,10 +22,6 @@ export function TransactionHistoryTable() {
     60_000,
     !!accessToken && agents.length > 0
   );
-
-  const explorerBase = process.env.NEXT_PUBLIC_CHAIN_ID === "8453"
-    ? "https://basescan.org/tx/"
-    : "https://sepolia.basescan.org/tx/";
 
   return (
     <div className="bg-brand-surface rounded-card border border-brand-border overflow-hidden">
@@ -50,7 +47,7 @@ export function TransactionHistoryTable() {
                 </td>
                 <td className="px-4 py-3">
                   {s.tx_hash ? (
-                    <a href={`${explorerBase}${s.tx_hash}`} target="_blank" rel="noopener noreferrer" className="text-brand-primary hover:underline font-mono text-xs">
+                    <a href={getExplorerTxUrl(s.tx_hash)} target="_blank" rel="noopener noreferrer" className="text-brand-primary hover:underline font-mono text-xs">
                       {s.tx_hash.slice(0, 12)}...
                     </a>
                   ) : (
